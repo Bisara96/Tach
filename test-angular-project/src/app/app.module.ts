@@ -10,6 +10,8 @@ import { NavBarComponent } from './partials/components/nav-bar/nav-bar.component
 import { ProjectInfoComponent } from './partials/components/project-info/project-info.component';
 import { TabHolderComponent } from './partials/components/tab-holder/tab-holder.component';
 import { TaskComponent } from './partials/components/task/task.component';
+import { IssuesComponent } from './partials/components/issues/issues.component';
+import { DashboardComponent } from './partials/components/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -18,7 +20,10 @@ import { TaskComponent } from './partials/components/task/task.component';
     MainComponent,
     NavBarComponent,
     ProjectInfoComponent,
-    TabHolderComponent
+    TabHolderComponent,
+    TaskComponent,
+    IssuesComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
