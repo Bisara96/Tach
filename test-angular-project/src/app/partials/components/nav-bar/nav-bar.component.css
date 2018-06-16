@@ -1,0 +1,18 @@
+.nav-btn-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: #E0E0E0;
+    font-family: Helvetica;
+    font-weight: bold;
+}
+
+.right-btn-set {
+    display: flex;
+    flex-direction: row;
+}
+
+.left-btn-set {
+    display: flex;
+    flex-direction: row;
+}

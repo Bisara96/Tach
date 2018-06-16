@@ -1,0 +1,33 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    height: 97vh;
+}
+
+.nav-bar-container {
+    /* flex: 1; */
+}
+
+.nav-bar-card {
+    height: 20px;
+    background-color: #212121;
+    display: flex;
+    align-items: center;
+}
+
+.component-container {
+    /* flex: 10; */
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.info-card {
+    flex: 1;
+    background-color: #313131;
+}
+
+.sub-components-card {
+    flex: 5;
+}
