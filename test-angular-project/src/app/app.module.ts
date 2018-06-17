@@ -2,6 +2,7 @@ import { MaterialModule } from './partials/modules/material/material.module';
 import { RoutesModule } from './routes/routes.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
@@ -28,7 +29,9 @@ import { DashboardComponent } from './partials/components/dashboard/dashboard.co
   imports: [
     BrowserModule,
     RoutesModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -6,7 +6,14 @@ import {
   MatTableModule,
   MatToolbarModule,
   MatFormFieldModule,
-  MatInputModule
+  MatInputModule,
+  MatChipsModule,
+  MatListModule,
+  MatSelectModule,
+  MatMenuModule,
+  MatDialogModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 } from '@angular/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -19,7 +26,14 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     MatTableModule,
     MatToolbarModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatChipsModule,
+    MatListModule,
+    MatSelectModule,
+    MatMenuModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: [
     MatButtonModule,
@@ -29,6 +43,14 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     MatTableModule,
     MatToolbarModule,
     MatFormFieldModule,
-    MatInputModule]
+    MatInputModule,
+    MatChipsModule,
+    MatListModule,
+    MatSelectModule,
+    MatMenuModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+  ]
 })
 export class MaterialModule { }

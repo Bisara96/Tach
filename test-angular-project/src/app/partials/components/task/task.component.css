@@ -1,0 +1,77 @@
+.task-data-table > mat-row, mat-header-row {
+    display: flex;
+    flex-direction: row;
+    background-color: #F5F5F5;
+}
+
+.header-card {
+    background-color: #303030;
+    color: #E0E0E0;
+    font-family: Helvetica;
+    font-weight: bold;
+}
+
+.task-actions-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px;
+    height: 40px;
+}
+
+.filter-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.task-actions-card > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.mat-column-taskno {
+    flex: 1;
+}
+
+.mat-column-name {
+    flex: 4;
+}
+
+.mat-column-status {
+    flex: 1;
+}
+
+.mat-column-due {
+    flex: 1;
+}
+
+.task-status-new mat-chip {
+    background-color: #e91e63;
+    color: #E0E0E0;
+    font-family: Helvetica;
+    font-weight: bold;
+}
+
+.task-status-done mat-chip {
+    background-color: #4CAF50;
+    color: #E0E0E0;
+    font-family: Helvetica;
+    font-weight: bold;
+}
+
+.task-status-inprogress mat-chip {
+    background-color: #03A9F4;
+    color: #E0E0E0;
+    font-family: Helvetica;
+    font-weight: bold;
+}
+
+.task-status-onhold mat-chip {
+    background-color: #F44336;
+    color: #E0E0E0;
+    font-family: Helvetica;
+    font-weight: bold;
+
+}

@@ -10,7 +10,7 @@
 
 .nav-bar-card {
     height: 20px;
-    background-color: #212121;
+    background-color: #262626;
     display: flex;
     align-items: center;
 }
@@ -25,7 +25,7 @@
 
 .info-card {
     flex: 1;
-    background-color: #313131;
+    background-color: #303030;
 }
 
 .sub-components-card {

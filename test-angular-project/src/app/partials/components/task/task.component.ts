@@ -1,38 +1,113 @@
-import { Component } from '@angular/core';
-import {MatTableDataSource} from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.css']
 })
-export class TaskComponent {
-  displayedColumns = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+export class TaskComponent implements OnInit {
+  displayedColumns = ['taskno', 'name', 'status', 'due'];
+  taskList: Task[] = [];
+  filters = [];
+  statusList = [];
+  filterStatus = new FormControl();
+  filterDate = new FormControl();
+  dataSource = new MatTableDataSource(this.taskList);
 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
+  ngOnInit() {
+    for (let index = 0; index < 30; index++) {
+      if (index % 2 === 0) {
+        this.taskList.push({
+          id: 'task67' + index,
+          name: 'Create an ui for sossssssssssssssssssssmething something ' + index,
+          status: 'new',
+          deadLine: index + '/06/2018'
+        });
+      } else if ((index % 3) === 0) {
+        this.taskList.push({
+          id: 'task67' + index,
+          name: 'Create an ui for sossssssssssssssssssssmething something ' + index,
+          status: 'done',
+          deadLine: index + '/06/2018'
+        });
+      } else if ((index / 2) > 0) {
+        this.taskList.push({
+          id: 'task67' + index,
+          name: 'Create an ui for sossssssssssssssssssssmething something ' + index,
+          status: 'inprogress',
+          deadLine: index + '/06/2018'
+        });
+      } else {
+        this.taskList.push({
+          id: 'task67' + index,
+          name: 'Create an ui for sossssssssssssssssssssmething something ' + index,
+          status: 'onhold',
+          deadLine: index + '/06/2018'
+        });
+      }
+    }
+
+    this.statusList = ['new', 'done', 'inprogress', 'onhold'];
+
+    console.log(JSON.stringify(this.taskList));
+    this.dataSource = new MatTableDataSource(this.taskList);
+    this.dataSource.filterPredicate = (data: any, filtersJson: string) => {
+      const matchFilter = [];
+      const filters = JSON.parse(filtersJson);
+
+      filters.forEach(filter => {
+        // check for null values!
+        const val = data[filter.id] === null ? '' : data[filter.id];
+        matchFilter.push(val.toLowerCase().includes(filter.value.toLowerCase()));
+      });
+
+      // Choose one
+       return matchFilter.every(Boolean); // AND condition
+      // return matchFilter.some(Boolean); // OR condition
+    };
   }
+
+  applyFilters() {
+    this.filters = [];
+    if (this.filterStatus.value) {
+      for (let i = 0; i < this.filterStatus.value.length; i++) {
+        this.filters.push({
+          'columnId': 'status',
+          'value': this.filterStatus.value[i]
+        });
+      }
+    }
+    if (this.filterDate.value) {
+      let dateArray = [];
+      dateArray = this.filterDate.value.toLocaleDateString().split('/');
+      let date = '';
+      const day = dateArray[1];
+      const month = (dateArray[0] < 10) ? '0' + dateArray[0] : dateArray[0];
+      const year = dateArray[2];
+      date = day + '/' + month + '/' + year;
+      console.log(date);
+      this.filters.push({
+        'columnId': 'deadLine',
+        'value': date
+      });
+    }
+    const tableFilters = [];
+    this.filters.forEach((filter) => {
+      tableFilters.push({
+        id: filter.columnId,
+        value: filter.value
+      });
+    });
+    this.dataSource.filter = JSON.stringify(tableFilters);
+  }
+
 }
 
-export interface PeriodicElement {
+export interface Task {
+  id: string;
   name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+  status: string;
+  deadLine: string;
 }
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];

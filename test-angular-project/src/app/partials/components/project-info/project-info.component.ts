@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectInfoComponent implements OnInit {
 
+  project: any = {};
+
   constructor() { }
 
   ngOnInit() {
+    this.project.name = 'Tach';
+    this.project.logo = 'assets/Images/project-info/project.png';
+    this.project.version = '1.0.0';
+    this.project.startDate = '17.06.2018';
   }
 
 }

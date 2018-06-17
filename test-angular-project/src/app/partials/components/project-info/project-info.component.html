@@ -1,3 +1,17 @@
-<p>
-  project-info works!
-</p>
+<div class="project-info-container">
+  <mat-card class="project-info-mat-card">
+    <mat-card-content class="project-info-content">
+      <img src="{{ project.logo }}" alt="Avatar" style="width:100px;border-radius: 50%;">
+      <div class="project-details-list">
+        <mat-list role="list">
+          <hr>
+          <mat-list-item role="listitem">{{ project.name }}</mat-list-item>
+          <hr>
+          <mat-list-item role="listitem">{{ project.version }}</mat-list-item>
+          <hr>
+          <mat-list-item role="listitem">{{ project.startDate }}</mat-list-item>
+        </mat-list>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
