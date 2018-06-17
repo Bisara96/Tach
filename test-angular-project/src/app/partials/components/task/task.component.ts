@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -15,6 +15,14 @@ export class TaskComponent implements OnInit {
   filterStatus = new FormControl();
   filterDate = new FormControl();
   dataSource = new MatTableDataSource(this.taskList);
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 
   ngOnInit() {
     for (let index = 0; index < 30; index++) {
@@ -50,9 +58,9 @@ export class TaskComponent implements OnInit {
     }
 
     this.statusList = ['new', 'done', 'inprogress', 'onhold'];
-
-    console.log(JSON.stringify(this.taskList));
     this.dataSource = new MatTableDataSource(this.taskList);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
     this.dataSource.filterPredicate = (data: any, filtersJson: string) => {
       const matchFilter = [];
       const filters = JSON.parse(filtersJson);
@@ -60,7 +68,13 @@ export class TaskComponent implements OnInit {
       filters.forEach(filter => {
         // check for null values!
         const val = data[filter.id] === null ? '' : data[filter.id];
-        matchFilter.push(val.toLowerCase().includes(filter.value.toLowerCase()));
+        if (filter.id === 'deadLine') {
+          matchFilter.push(val.toLowerCase() === filter.value.toLowerCase());
+        } else if (filter.id === 'status') {
+          matchFilter.push(filter.value.toLowerCase().indexOf(val.toLowerCase()) >= 0);
+        } else {
+          matchFilter.push(val.toLowerCase().includes(filter.value.toLowerCase()));
+        }
       });
 
       // Choose one
@@ -71,14 +85,16 @@ export class TaskComponent implements OnInit {
 
   applyFilters() {
     this.filters = [];
+    let status = '';
     if (this.filterStatus.value) {
       for (let i = 0; i < this.filterStatus.value.length; i++) {
-        this.filters.push({
-          'columnId': 'status',
-          'value': this.filterStatus.value[i]
-        });
+        status = status + '' + this.filterStatus.value[i];
       }
     }
+    this.filters.push({
+      'columnId': 'status',
+      'value': status
+    });
     if (this.filterDate.value) {
       let dateArray = [];
       dateArray = this.filterDate.value.toLocaleDateString().split('/');
@@ -87,7 +103,6 @@ export class TaskComponent implements OnInit {
       const month = (dateArray[0] < 10) ? '0' + dateArray[0] : dateArray[0];
       const year = dateArray[2];
       date = day + '/' + month + '/' + year;
-      console.log(date);
       this.filters.push({
         'columnId': 'deadLine',
         'value': date
@@ -101,6 +116,12 @@ export class TaskComponent implements OnInit {
       });
     });
     this.dataSource.filter = JSON.stringify(tableFilters);
+  }
+
+  clearFilters() {
+    this.filterStatus.reset();
+    this.filterDate.reset();
+    this.dataSource.filter = JSON.stringify([]);
   }
 
 }

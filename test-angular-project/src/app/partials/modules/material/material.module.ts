@@ -13,7 +13,9 @@ import {
   MatMenuModule,
   MatDialogModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatSortModule,
+  MatPaginatorModule
 } from '@angular/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -33,7 +35,9 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     MatMenuModule,
     MatDialogModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSortModule,
+    MatPaginatorModule
   ],
   exports: [
     MatButtonModule,
@@ -50,7 +54,9 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     MatMenuModule,
     MatDialogModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSortModule,
+    MatPaginatorModule
   ]
 })
 export class MaterialModule { }
